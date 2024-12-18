@@ -13,7 +13,7 @@ class CalculatorService {
 
       const price = menuItems[item];
       if (!price) {
-        throw new Error(`Oops! "${item}" is not on the menu.`);
+        throw new Error(`${item} is not on the menu.`);
       }
 
       const { discount, total } = calculateBundleDiscount(item, quantity, price);
