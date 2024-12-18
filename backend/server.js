@@ -8,13 +8,24 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const CORS_ORIGIN = process.env.CORS_ORIGIN || "*"; 
 
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  process.env.CORS_ORIGIN || "*" 
+];
 
 const corsOptions = {
-  origin: CORS_ORIGIN,
-  optionsSuccessStatus: 200,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS")); 
+    }
+  },
+  optionsSuccessStatus: 200, 
 };
+
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json());

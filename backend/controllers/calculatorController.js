@@ -2,24 +2,27 @@ const calculatorService = require("../services/calculatorService");
 
 exports.calculateOrder = (req, res) => {
   try {
-    const { items, memberCard } = req.body;
+    
+    const { items, memberCard = false } = req.body;
 
+    
     if (!items || typeof items !== "object") {
-      return res.status(400).json({ error: "Invalid input! 'items' should be an object." });
+      return res.status(400).json({
+        error: "'items' must be a valid object containing menu items and quantities.",
+      });
     }
 
-    const isMember = memberCard || false;
-    const result = calculatorService.calculate(items, isMember);
+    
+    const result = calculatorService.calculate(items, memberCard);
 
+  
     res.json({
       success: true,
-      message: "Here’s the breakdown of your order:",
-      breakdown: result.breakdown,
-      memberDiscount: result.memberDiscount,
-      total: result.total,
+      message: "Here’s your order breakdown:",
+      ...result, 
     });
   } catch (error) {
-
+   
     res.status(400).json({ error: error.message });
   }
 };

@@ -4,14 +4,14 @@ const calculatorService = require("../services/calculatorService");
 
 router.post("/calculate", (req, res) => {
   try {
-    const { items, memberCard } = req.body;
 
+    const { items, memberCard = false } = req.body;
     if (!items || typeof items !== "object") {
-      return res.status(400).json({ error: "'items' must be an object with menu counts." });
+      return res.status(400).json({
+        error: "'items' must be an object with menu item counts.",
+      });
     }
-
     const result = calculatorService.calculate(items, memberCard);
-
     res.json(result);
   } catch (error) {
     console.error("Error calculating order:", error.message);

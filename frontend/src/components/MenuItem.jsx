@@ -6,6 +6,13 @@ function MenuItem({ item, count, onIncrease, onDecrease }) {
       <img src={item.image} alt={item.name} className="w-full h-32 object-cover mb-3" />
       <h3 className="font-semibold">{item.name} Set</h3>
       <p>{item.price} THB</p>
+
+      {item.promotion && (
+        <p className="text-sm text-green-600 font-bold mt-2">
+          {item.promotion}
+        </p>
+      )}
+
       <div className="flex justify-center items-center gap-3 mt-3">
         <button
           onClick={onDecrease}

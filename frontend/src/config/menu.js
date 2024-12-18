@@ -7,11 +7,12 @@ import purpleSet from "../assets/images/purple-set.png";
 import orangeSet from "../assets/images/orange-set.png";
 
 export const menuItems = [
-  { name: "Orange", price: 120, image: orangeSet },
-  { name: "Pink", price: 80, image: pinkSet },
-  { name: "Green", price: 40, image: greenSet },
-  { name: "Red", price: 50, image: redSet },
-  { name: "Blue", price: 30, image: blueSet },
-  { name: "Yellow", price: 50, image: yellowSet },
-  { name: "Purple", price: 90, image: purpleSet },
+  { name: "Orange", price: 120, image: orangeSet, promotion: "Bundle Discount 5%" },
+  { name: "Pink", price: 80, image:pinkSet, promotion: "Bundle Discount 5%" },
+  { name: "Green", price: 40, image:greenSet, promotion: "Bundle Discount 5%" },
+  { name: "Red", price: 50, image:redSet, promotion: null },
+  { name: "Blue", price: 30, image:blueSet, promotion: null },
+  { name: "Yellow", price: 50, image:yellowSet, promotion: null },
+  { name: "Purple", price: 90, image:purpleSet, promotion: null },
 ];
+
