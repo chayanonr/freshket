@@ -9,7 +9,7 @@ function calculateBundleDiscount(item, quantity, price) {
 
   const pairs = Math.floor(quantity / 2);
   const remaining = quantity % 2;
-  console.log(`Item "${item}" forms ${pairs} pair(s) and has ${remaining} remaining item(s).`);
+  console.log(`Item "${item}" forms ${pairs} pair(s) and has ${remaining} remaining items`);
 
   const discount = pairs * price * 2 * bundleDiscountRate;
   console.log(`Bundle discount for item "${item}": ${discount} THB`);
