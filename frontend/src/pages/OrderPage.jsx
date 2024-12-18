@@ -13,25 +13,38 @@ function OrderPage() {
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
+    // Redirect to homepage if no valid data is passed
     if (!menu.length || Object.keys(orders).length === 0) {
+      console.warn("Missing menu or orders data. Redirecting to homepage.");
       navigate("/");
       return;
     }
 
+    // Prepare the payload and call the calculateOrder API
     const payload = { items: orders, memberCard };
+    console.log("Sending payload to backend:", payload);
+
     calculateOrder(payload)
-      .then((response) => setCalculationResult(response))
-      .catch(() => setErrorMessage("Failed to calculate the order. Please try again."));
+      .then((response) => {
+        console.log("Calculation response:", response);
+        setCalculationResult(response);
+      })
+      .catch((error) => {
+        console.error("Error calculating order:", error.message);
+        setErrorMessage("Failed to calculate the order. Please try again.");
+      });
   }, [menu, orders, memberCard, navigate]);
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
       <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">Order Summary</h1>
 
+      {/* Display error message if API call fails */}
       {errorMessage && (
         <p className="text-red-600 text-center mb-4 font-semibold">{errorMessage}</p>
       )}
 
+      {/* Show loading or order details */}
       {!calculationResult ? (
         <p className="text-center text-gray-600">Calculating your order...</p>
       ) : (
@@ -45,26 +58,24 @@ function OrderPage() {
                   {item.unitPrice} THB
                 </div>
                 <div>
-                  Before Discount: <span className="text-gray-800">{item.quantity * item.unitPrice} THB</span>
+                  <p>Before Discount: {item.quantity * item.unitPrice} THB</p>
                   {item.discount > 0 && (
-                    <div className="text-sm text-red-500">
-                      Discount: -{item.discount} THB
-                    </div>
+                    <p className="text-sm text-red-500">Discount: -{item.discount} THB</p>
                   )}
-                  <div className="font-bold">
-                    Total: {item.total} THB
-                  </div>
+                  <p className="font-bold">Total: {item.total} THB</p>
                 </div>
               </li>
             ))}
           </ul>
 
+          {/* Show membership discount*/}
           {calculationResult.memberDiscount > 0 && (
             <div className="mt-4 text-green-600 font-semibold">
               Membership Discount: -{calculationResult.memberDiscount} THB
             </div>
           )}
 
+          {/* Show totals */}
           <div className="mt-6 text-right">
             <p className="text-lg font-semibold text-gray-700">
               Total Before Discounts:{" "}
@@ -79,6 +90,7 @@ function OrderPage() {
             </h3>
           </div>
 
+          {/* Back to menu*/}
           <div className="text-center mt-6">
             <button
               onClick={() => navigate("/")}

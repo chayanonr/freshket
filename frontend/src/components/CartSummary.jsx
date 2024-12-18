@@ -1,15 +1,17 @@
 import React from "react";
 
 function CartSummary({ orders, menu }) {
-  // Filter out items with a count of zero
+
   const orderedItems = Object.entries(orders).filter(([_, count]) => count > 0);
 
-  // Calculate the total price before discounts
   const totalBeforeDiscounts = orderedItems.reduce((total, [itemName, count]) => {
-    const menuItem = menu.find((item) => item.name === itemName);
-    return total + count * (menuItem?.price || 0); // Handle cases where item might not exist in menu
+    const menuItem = menu.find((item) => item.name === itemName); // Match the menu item
+    if (!menuItem) {
+      console.warn(`Menu item "${itemName}" not found in the menu. Skipping.`);
+      return total;
+    }
+    return total + count * menuItem.price;
   }, 0);
-
   return (
     <div className="mt-6">
       <h3 className="text-lg font-semibold mb-2">Cart Summary</h3>

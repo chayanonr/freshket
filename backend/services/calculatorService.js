@@ -26,7 +26,7 @@ class CalculatorService {
         total: parseFloat(total.toFixed(2)),      
       });
 
-      totalPrice += total;
+      totalPrice = totalPrice + total;
     }
 
     const memberDiscount = isMember ? totalPrice * memberDiscountRate : 0;
