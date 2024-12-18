@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuItem from "../components/MenuItem";
 import CartSummary from "../components/CartSummary";
-import { menuItems } from "../config/menu"; // Centralized menu configuration
+import { menuItems } from "../config/menu";
 
 function HomePage() {
   const navigate = useNavigate();

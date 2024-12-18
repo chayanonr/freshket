@@ -1,5 +1,3 @@
-// src/config/menu.js
-
 import redSet from "../assets/images/red-set.png";
 import greenSet from "../assets/images/green-set.png";
 import blueSet from "../assets/images/blue-set.png";
