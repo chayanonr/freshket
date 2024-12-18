@@ -30,7 +30,7 @@ class CalculatorService {
     }
 
     const memberDiscount = isMember ? totalPrice * memberDiscountRate : 0;
-    totalPrice -= memberDiscount;
+    totalPrice = totalPrice - memberDiscount;
 
     return {
       breakdown,
