@@ -79,4 +79,5 @@ npm run dev
 npm install --save-dev jest
 
 # Run Jest
+cd backend
 npm test
